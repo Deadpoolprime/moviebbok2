@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings{% endblock %}
+
+{% block content %}
+<h1>My Bookings</h1>
+{% if bookings %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Movie</th>
+                <th>Showtime</th>
+                <th>Seat</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.ticket_id }}</td>
+                <td>{{ booking.title }}</td>
+                <td>{{ booking.show_time }}</td>
+                <td>{{ booking.seat_no }}</td>
+                <td><a href="{{ url_for('ticket', ticket_id=booking.ticket_id) }}">View Ticket</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You have not booked any tickets yet. <a href="{{ url_for('home') }}">Browse movies now!</a></p>
+{% endif %}
+{% endblock %}

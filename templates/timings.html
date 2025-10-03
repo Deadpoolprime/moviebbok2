@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Showtimes for {{ movie.title }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+    <h1>Showtimes for {{ movie.title }}</h1>
+    <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+    {% if showtimes %}
+        <ul>
+        {% for time in showtimes %}
+            <!-- Link to seats now uses showtime ID -->
+            <li>{{ time.show_time }} - <a href="/seats/{{ time.id }}">View Seats</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No showtimes available for this movie yet.</p>
+    {% endif %}
+    
+    <p><a href="/">Back to Movies</a></p>
+    <script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

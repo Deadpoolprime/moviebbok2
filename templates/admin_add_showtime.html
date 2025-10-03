@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Showtime</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<h1>Add Showtime</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<form method="POST">
+    <label>Movie:</label>
+    <select name="movie_id" required>
+        {% for movie in movies %}
+            <option value="{{ movie.id }}">{{ movie.title }}</option>
+        {% endfor %}
+    </select><br><br>
+    
+    <label>Date:</label>
+    <input type="date" name="show_date" required><br><br>
+    
+    <label>Time:</label>
+    <input type="time" name="show_time_only" required><br><br>
+    
+    <button type="submit">Add Showtime</button>
+</form>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

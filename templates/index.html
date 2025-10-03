@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Available Movies</h2>
+
+<div class="movie-grid">
+{% for movie in movies %}
+    <div class="movie-card">
+
+        <!-- Poster acts as the main link to select showtimes -->
+        <a href="/timings/{{ movie.id }}" class="poster-link">
+            {% if movie.poster_url %}
+                <img src="{{ url_for('static', filename=movie.poster_url.replace('static/', '')) }}" alt="{{ movie.title }}" class="poster-placeholder" style="background: none; object-fit: cover;">
+            {% else %}
+                <div class="poster-placeholder">
+                    {{ movie.title }}
+                </div>
+            {% endif %}
+        </a>
+
+        <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <a href="/timings/{{ movie.id }}">Select Showtime</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<div class="admin-section">
+    <hr>
+    <h2>Admin Panel</h2>
+    <form method="POST">
+        <input type="password" name="admin_password" placeholder="Enter admin password" required>
+        <button type="submit">Login as Admin</button>
+    </form>
+</div>
+{% endblock %}

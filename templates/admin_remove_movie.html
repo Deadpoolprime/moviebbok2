@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>Remove Movie</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<h1>Remove Movie</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+{% with messages = get_flashed_messages() %}
+ {% if messages %}
+  <ul style="color:green;">
+   {% for msg in messages %}
+    <li>{{ msg }}</li>
+   {% endfor %}
+  </ul>
+ {% endif %}
+{% endwith %}
+
+{% if movies %}
+    <table border="1">
+        <tr><th>Movie Title</th><th>Action</th></tr>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.title }}</td>
+            <td>
+                <form method="POST" onsubmit="return confirm('WARNING: Deleting this movie will DELETE ALL its showtimes, seats, and bookings. Are you sure?');">
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    <button type="submit">Remove Movie</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No movies currently available.</p>
+{% endif %}
+
+<p><a href="/admin/dashboard">Back to Dashboard</a></p>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

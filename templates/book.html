@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Book Seat{% endblock %}
+
+{% block content %}
+ <!-- The 'movie' variable holds all showtime data -->
+ <h1>Book {{ seat.seat_no }} for {{ movie.title }} ({{ movie.show_time }})</h1>
+ 
+ <form method="POST">
+    <p>You are logged in as <strong>{{ session.username }}</strong>.</p>
+    <p>Click below to confirm your booking for seat <strong>{{ seat.seat_no }}</strong>.</p>
+    <br>
+    <button type="submit">Confirm Booking</button>
+ </form>
+{% endblock %}

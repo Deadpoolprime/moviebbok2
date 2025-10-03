@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>All Bookings</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<h1>All Bookings</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<table border="1">
+<tr><th>Ticket ID</th><th>Name</th><th>Email</th><th>Movie</th><th>Time</th><th>Seat</th></tr>
+{% for b in bookings %}
+<tr>
+<td>{{ b.ticket_id }}</td>
+<td>{{ b.username }}</td>
+<td>{{ b.email }}</td>
+<td>{{ b.title }}</td>
+<td>{{ b.show_time }}</td>
+<td>{{ b.seat_no }}</td>
+</tr>
+{% endfor %}
+</table>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

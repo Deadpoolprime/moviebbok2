@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Movie Booking{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color);">
+            <div>
+                <a href="{{ url_for('home') }}" style="font-weight: bold; font-size: 1.2em;">Movie Booking</a>
+                {% if 'user_id' in session %}
+                    <a href="{{ url_for('my_bookings') }}" style="margin-left: 15px;">My Bookings</a>
+                {% endif %}
+                 {% if request.path.startswith('/admin') %}
+                    <a href="{{ url_for('admin_dashboard') }}" style="margin-left: 15px; font-weight: bold;">Admin Dashboard</a>
+                {% endif %}
+            </div>
+            <div>
+                {% if 'user_id' in session %}
+                    <span style="margin-right: 15px;">Welcome, {{ session.username }}!</span>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" style="margin-right: 15px;">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+                <button onclick="toggleTheme()" style="margin-left: 15px;">Toggle Theme</button>
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding: 20px;">
+        {# Flash messages with categories for better styling #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+    
+    <script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

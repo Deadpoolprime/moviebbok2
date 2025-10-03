@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Movie: {{ movie.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Edit Movie: {{ movie.title }}</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<!-- Must add enctype="multipart/form-data" for file uploads -->
+<form method="POST" enctype="multipart/form-data">
+    <label>Movie Title:</label>
+    <input type="text" name="title" value="{{ movie.title }}" required><br><br>
+    
+    <label>Current Poster:</label>
+    <div>
+        {% if movie.poster_url %}
+            <img src="{{ url_for('static', filename=movie.poster_url.replace('static/', '')) }}" alt="{{ movie.title }}" style="max-height: 100px;"><br>
+            <small>Upload a new file to replace the current one.</small>
+        {% else %}
+            <p>(No current poster)</p>
+        {% endif %}
+    </div><br>
+
+    <label>Change Poster (Optional):</label>
+    <input type="file" name="poster" accept="image/*"><br><br>
+    
+    <button type="submit">Save Changes</button>
+</form>
+
+<p><a href="/admin/edit_movie?password={{ request.args.get('password') }}">Back to Movie List</a></p>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

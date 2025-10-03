@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Add Movie</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<!-- Must add enctype="multipart/form-data" for file uploads -->
+<form method="POST" enctype="multipart/form-data">
+  <label>Movie Title:</label>
+  <input type="text" name="title" required><br><br>
+  
+  <label>Movie Poster (Optional):</label>
+  <input type="file" name="poster" accept="image/*"><br><br>
+  
+  <button type="submit">Add</button>
+</form>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

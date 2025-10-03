@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<ul>
+  <li><a href="/admin/add_movie?password=admin123">Add Movie</a></li>
+  <li><a href="/admin/add_showtime?password=admin123">Add Showtime</a></li>
+  <li><a href="/admin/edit_movie?password=admin123">Edit Movie Details</a></li> 
+  <li><a href="/admin/bookings?password=admin123">View All Bookings</a></li>
+  <hr>
+  <li><a href="/admin/remove_movie?password=admin123">Remove Movie</a></li>
+  <li><a href="/admin/remove_showtime?password=admin123">Remove Showtime</a></li>
+  <hr>
+  <li><a href="/admin/stats?password=admin123">View Statistics</a></li>
+</ul>
+
+
+<a href="/">Logout</a>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

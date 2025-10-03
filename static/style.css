@@ -1,0 +1,218 @@
+:root {
+    /* Light Mode Defaults */
+    --background-color: #f4f4f9;
+    --text-color: #333;
+    --header-color: #0056b3;
+    --link-color: #007bff;
+    --card-background: #ffffff;
+    --border-color: #ddd;
+    --admin-separator: #ccc;
+    --button-primary: #007bff;
+    --button-hover: #0056b3;
+    --input-background: #ffffff;
+    --table-header-bg: #0056b3;
+    --flash-bg: #fff3cd;
+    --flash-text: #856404;
+}
+
+.dark-mode {
+    /* Dark Mode Overrides */
+    --background-color: #000000;
+    --text-color: #e0e0e0;
+    --header-color: #ffffff;
+    --link-color: hsl(0, 100%, 60%);
+    --card-background: #2c2c2c;
+    --border-color: #444444;
+    --admin-separator: #555;
+    --button-primary: #a40000;
+    --button-hover: #660000;
+    --input-background: #333333;
+    --table-header-bg: #444444;
+    --flash-bg: #401f4c;
+    --flash-text: #bb86fc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2 {
+    color: var(--header-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--table-header-bg);
+    color: white;
+}
+
+form {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid var(--admin-separator);
+    border-radius: 5px;
+    max-width: 400px;
+    background-color: var(--card-background);
+}
+
+input[type="text"], input[type="password"], input[type="email"], 
+input[type="date"], input[type="time"], select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px 0;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-background);
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--button-primary);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+/* Flash Messages */
+.flash-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: var(--flash-bg);
+    color: var(--flash-text);
+    border: 1px solid var(--link-color);
+}
+
+/* Movie Card */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.movie-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    text-align: center;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.poster-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.poster-placeholder {
+    width: 100%;
+    height: 300px;
+    background-color: #333; /* Light mode default background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f4f4f9;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dark-mode .poster-placeholder {
+    background-color: #000; 
+    color: #90caf9;
+}
+
+.poster-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 10px 5px;
+}
+
+.movie-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--header-color);
+}
+
+.admin-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--admin-separator);
+}
+
+/* Seat specific styles */
+.seat { 
+    display: inline-block; 
+    width: 40px; 
+    height: 40px; 
+    margin: 5px; 
+    text-align: center; 
+    line-height: 40px; 
+    border: 1px solid var(--border-color); 
+    border-radius: 5px;
+    font-weight: bold;
+}
+.booked { 
+    background-color: #cf6679; /* Reddish for booked */
+    color: var(--text-color); 
+    cursor: not-allowed; 
+}
+.available { 
+    background-color: #03dac6; /* Cyan/Teal for available */
+    color: var(--background-color); 
+}
+.available a {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>Remove Showtime</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<h1>Remove Showtime</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+{% with messages = get_flashed_messages() %}
+ {% if messages %}
+  <ul style="color:green;">
+   {% for msg in messages %}
+    <li>{{ msg }}</li>
+   {% endfor %}
+  </ul>
+ {% endif %}
+{% endwith %}
+
+{% if showtimes %}
+    <table border="1">
+        <tr><th>Movie</th><th>Showtime</th><th>Action</th></tr>
+        {% for st in showtimes %}
+        <tr>
+            <td>{{ st.title }}</td>
+            <td>{{ st.show_time }}</td>
+            <td>
+                <form method="POST" onsubmit="return confirm('Are you sure you want to delete this showtime? All associated bookings and seats will be lost!');">
+                    <input type="hidden" name="showtime_id" value="{{ st.id }}">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No showtimes currently available.</p>
+{% endif %}
+
+<p><a href="/admin/dashboard">Back to Dashboard</a></p>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

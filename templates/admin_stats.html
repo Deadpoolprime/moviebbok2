@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin Statistics</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<h1>System Statistics</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+<h2>Overall Data</h2>
+<ul>
+    <li>Total Movies Listed: <b>{{ stats.total_movies }}</b></li>
+    <li>Total Bookings Made: <b>{{ stats.total_bookings }}</b></li>
+    <li>Total Seats Unbooked (Across all current showtimes): <b>{{ stats.unbooked_seats }}</b></li>
+</ul>
+
+<h2>Top 5 Most Popular Showtimes</h2>
+{% if stats.top_showtimes %}
+    <table border="1">
+        <tr><th>Movie</th><th>Time</th><th>Bookings</th></tr>
+        {% for showtime in stats.top_showtimes %}
+        <tr>
+            <td>{{ showtime.title }}</td>
+            <td>{{ showtime.show_time }}</td>
+            <td>{{ showtime.booking_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No bookings data available yet to calculate popularity.</p>
+{% endif %}
+
+<p><a href="/admin/dashboard">Back to Dashboard</a></p>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

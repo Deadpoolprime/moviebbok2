@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Select Movie to Edit</h1>
+<button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+{% with messages = get_flashed_messages() %}
+ {% if messages %}
+  <ul class="flash-message">
+   {% for msg in messages %}
+    <li>{{ msg }}</li>
+   {% endfor %}
+  </ul>
+ {% endif %}
+{% endwith %}
+
+{% if movies %}
+    <table border="1">
+        <tr><th>Title</th><th>Poster</th><th>Action</th></tr>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.title }}</td>
+            <td>
+                {% if movie.poster_url %}
+                    <img src="{{ url_for('static', filename=movie.poster_url.replace('static/', '')) }}" alt="{{ movie.title }}" style="max-height: 50px;">
+                {% else %}
+                    (None)
+                {% endif %}
+            </td>
+            <td>
+                <a href="/admin/edit_movie/{{ movie.id }}?password={{ request.args.get('password') }}">Edit Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No movies found to edit.</p>
+{% endif %}
+
+<p><a href="/admin/dashboard">Back to Dashboard</a></p>
+<script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

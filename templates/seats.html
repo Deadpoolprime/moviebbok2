@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .seat { display: inline-block; width: 40px; height: 40px; margin: 5px; text-align: center; line-height: 40px; border: 1px solid black; cursor: pointer; }
+    .booked { background-color: red; color: white; cursor: not-allowed; }
+    .available { background-color: lightgreen; }
+  </style>
+</head>
+<body>
+  <h1>Seats for {{ showtime.title }} ({{ showtime.show_time }})</h1>
+  <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+  <div>
+  {% for seat in seats %}
+    <div class="seat {% if seat.is_booked %}booked{% else %}available{% endif %}">
+      {% if seat.is_booked %}
+        {{ seat.seat_no }}
+      {% else %}
+        <!-- Link now uses showtime ID and the specific seat ID -->
+        <a href="/book/{{ showtime.id }}/{{ seat.id }}">{{ seat.seat_no }}</a>
+      {% endif %}
+    </div>
+    {% if loop.index % 5 == 0 %}<br>{% endif %}
+  {% endfor %}
+  </div>
+  <script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>

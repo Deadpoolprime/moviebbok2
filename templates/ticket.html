@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticket</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>🎟 Your Ticket</h1>
+  <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+  <p><b>Ticket ID:</b> {{ booking.ticket_id }}</p>
+  <p><b>Name:</b> {{ booking.username }}</p>
+  <p><b>Email:</b> {{ booking.email }}</p>
+  <p><b>Movie:</b> {{ booking.title }}</p>
+  <p><b>Time:</b> {{ booking.show_time }}</p>
+  <p><b>Seat:</b> {{ booking.seat_no }}</p>
+  <script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
+</body>
+</html>
+
